@@ -10,7 +10,9 @@
 
 <body>
 	<h1>Ролл по числу</h1>
-	<input type="number" placeholder="Введите число" name="max" class="number">
+	<form action="#" name="rollForm" style="display: inline-block;">
+		<input type="number" placeholder="Введите число" name="max" class="number">
+	</form>
 	<button class="btn">Бросок</button>
 	<div>
 		<h2>Результат</h2>
@@ -22,11 +24,17 @@
 		let btn = document.querySelector('.btn'),
 			result = document.querySelector('.result');
 
-		btn.onclick = function rolling() {
+		document.forms.rollForm.addEventListener('submit', rolling);
+		function rolling(event) {
+			event.preventDefault();
+
 			let number = +document.querySelector('.number').value;
 
 			let roll = Math.floor(Math.random() * number) + 1;
 			result.textContent = roll;
+
+			document.querySelector('.number').value = '';
+			document.querySelector('.number').focus();
 		};
 	</script>
 </body>
