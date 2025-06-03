@@ -2,41 +2,47 @@
 <html lang="ru">
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Roller</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Roller</title>
+    <link rel="manifest" href="manifest.json">
 </head>
 
 <body>
-	<h1>Ролл по числу</h1>
-	<form action="#" name="rollForm" style="display: inline-block;">
-		<input type="number" placeholder="Введите число" name="max" class="number">
-		<button class="btn">Бросок</button>
-	</form>
-	<div>
-		<h2>Результат</h2>
-		<span class="result">???</span>
-	</div>
-	<script>
-		'use strict'
+<h1>Ролл по числу</h1>
+<form action="#" name="rollForm" style="display: inline-block;">
+    <input type="number" placeholder="Введите число" name="max" class="number">
+    <button class="btn">Бросок</button>
+</form>
+<div>
+    <h2>Результат</h2>
+    <span class="result">???</span>
+</div>
+<script>
+    'use strict'
 
-		let btn = document.querySelector('.btn'),
-			result = document.querySelector('.result');
+    let btn = document.querySelector('.btn'),
+        result = document.querySelector('.result');
 
-		document.forms.rollForm.addEventListener('submit', rolling);
-		function rolling(event) {
-			event.preventDefault();
+    document.forms.rollForm.addEventListener('submit', rolling);
 
-			let number = +document.querySelector('.number').value;
+    function rolling(event) {
+        event.preventDefault();
 
-			let roll = Math.floor(Math.random() * number) + 1;
-			result.textContent = roll;
+        let number = +document.querySelector('.number').value;
 
-			document.querySelector('.number').value = '';
-			document.querySelector('.number').focus();
-		};
-	</script>
+        let roll = Math.floor(Math.random() * number) + 1;
+        result.textContent = roll;
+
+        document.querySelector('.number').value = '';
+        document.querySelector('.number').focus();
+    };
+
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('service-worker.js');
+    }
+</script>
 </body>
 
 </html>
